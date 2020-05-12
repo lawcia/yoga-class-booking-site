@@ -1,4 +1,26 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
 
+<div class="row">
+<div class="col-sm-6 home-col">
+  <h1>🧘 Yogabook</h1>
+  <p class="lead">Where independent yoga instructors find scenic venues</p>
+  <div class="row">
+  <a class="link" href="/venues">Find a venue</a> 
+  <a class="link list" href="/venues/create">List a venue</a>
+  
+  </div>
+  <div class="row">
+    <a class="link" href="/instructors">Find an Instructor</a>
+  <a class="link list" href="/instructors/create">List an Instructor</a>
+</div>
+  <p class="lead">Promote your class for free.</p>
+  <div class="row">
+  <a class="link success" href="/classes/create">Promote a class</a>
+</div>
+</div>
+<div class="col-sm-6 home-col">
+<img class="img-fluid" src="{{ url_for('static', filename='img/sunset_yoga.jpg')}}" alt="photo of woman doing a yoga pose on the beach"/>
+</div>
+</div>
 {% endblock %}
