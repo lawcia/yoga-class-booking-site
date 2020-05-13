@@ -84,7 +84,7 @@ def list_instructors():
 
 @app.route('/instructors/<id>')
 def instructor(id):
-    return render_template('pages/instructor.html')
+    return render_template('pages/instructor.html', instructor = Instructor.query.get(id))
 
 if __name__ == '__main__':
     app.run()
