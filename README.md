@@ -12,3 +12,13 @@ Yogabook is a fitness class venue and yoga instructor booking site that enables 
 ## Database Schema
 The relationships between venues and yoga instructors is modelled below.
 ![](yoga.png)
+
+## Scripts
+
+1. Seed the database
+
+``` flask seed seed ```
+
+2. Clear the database
+
+``` flask seed clear ```
