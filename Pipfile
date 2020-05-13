@@ -9,6 +9,7 @@ verify_ssl = true
 flask-migrate = "*"
 flask = "*"
 flask-sqlalchemy = "*"
+dotenv = "*"
 
 [requires]
 python_version = "3.8"
