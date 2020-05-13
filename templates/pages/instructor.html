@@ -1,0 +1,15 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-6">
+  <h2>{{ instructor.name }}</h2>
+  <p><i class="fas fa-city"></i> {{ instructor.city }}</p>
+  <p><i class="fas fa-phone"></i> {{ instructor.phone }}</p>
+  <p><i class="far fa-envelope"></i> {{ instructor.email }}</p>
+  <p><i class="fab fa-instagram"></i> {{ instructor.insta_link }}</p>
+</div>
+<div class="col-sm-6">
+<img class="img-fluid" src="{{ instructor.img_link }}" alt="photo of {{ instructor.name }}" >
+</div>
+</div>
+{% endblock %}

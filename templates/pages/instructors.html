@@ -2,13 +2,13 @@
 {% block content %}
 <div class="row">
   <div class="col-sm-6">
-  <h2>hello</h2>
+  <h2>Instructors</h2>
   <ul class="items">
     {% for instructor in instructors %}
     <li>
       <a href="/instructors/{{ instructor.id }}">
       <div class="item">
-        <h5>{{ artists.name }}</h5>
+        <h5>{{ instructor.name }}</h5>
       </div>
       </a>
     </li>

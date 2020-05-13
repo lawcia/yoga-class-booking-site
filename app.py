@@ -79,8 +79,12 @@ def index():
     return render_template('pages/home.html')
 
 @app.route('/instructors')
-def list_instructors():
-    return render_template('pages/list.html')
+def list_instructors(): 
+    return render_template('pages/instructors.html', instructors = Instructor.query.all())
+
+@app.route('/instructors/<id>')
+def instructor(id):
+    return render_template('pages/instructor.html')
 
 if __name__ == '__main__':
     app.run()
