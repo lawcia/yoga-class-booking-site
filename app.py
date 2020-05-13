@@ -1,9 +1,12 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 app = Flask(__name__)
 app.config.from_object('config')
+
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 # Models
 
@@ -24,7 +27,6 @@ class ClassType(db.Model):
   id = db.Column(db.Integer, primary_key=True)
   class_type = db.Column(db.Integer, nullable=False)
   instructor_id = db.Column(db.Integer, db.ForeignKey('instructor.id'))
-
 
 
 @app.route('/')
