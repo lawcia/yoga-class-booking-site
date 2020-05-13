@@ -78,6 +78,9 @@ app.cli.add_command(seed_cli)
 def index():
     return render_template('pages/home.html')
 
+@app.route('/instructors')
+def list_instructors():
+    return render_template('pages/list.html')
 
 if __name__ == '__main__':
     app.run()
