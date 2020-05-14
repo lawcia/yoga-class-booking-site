@@ -63,11 +63,18 @@ def seed():
 
 @seed_cli.command('clear')
 def clear():
+    print('clear')
     try:
-        db.session.query(Instructor).delete()
-        db.session.query(ClassType).delete()
+        instructors = Instructor.query.all()
+        classtypes = ClassType.query.all()
+        for instructor in instructors:
+            db.session.delete(instructor)
+        for classtype in classtypes:
+            db.session.delete(classtype)
         db.session.commit()
+        print('done')
     except:
+        print('error')
         db.session.rollback()
 
 
