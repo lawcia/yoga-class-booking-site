@@ -1,19 +1,22 @@
 {% extends 'layouts/main.html' %}
 {% block content %}
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-6 p-5">
   <h2>Instructors</h2>
-  <ul class="items">
+
     {% for instructor in instructors %}
-    <li >
-      <a href="/instructors/{{ instructor.id }}">
-      <div class="item">
-        <h5>{{ instructor.name }}</h5>
-      </div>
-      </a>
-    </li>
+    <a href="/instructors/{{ instructor.id }}" class="m-2">
+    <div class="card" >
+        <div class="card-body">{{ instructor.name }}
+     
+    </div>
+  </div>
+</a>
     {% endfor %}
-  </ul>
+ 
+</div>
+<div class="col-sm-6 p-5">
+  <img class="img-fluid" src="/static/img/yoga_on_beach.jpg" alt="group doing yoga on the beach">
 </div>
 </div>
 {% endblock %}
