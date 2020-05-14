@@ -1,7 +1,8 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask.cli import AppGroup
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 seed_cli = AppGroup('seed')
@@ -43,11 +44,11 @@ class ClassType(db.Model):
 @seed_cli.command('seed')
 def seed():
     sarah = Instructor(name="Sarah Den", city="London", phone="00000000000",
-                       img_link="https://test.com", email="sarahden@mail.com", insta_link="https://insta.com/sarahden")
+                       img_link="/images/daisymeadow.jpg", email="sarahden@mail.com", insta_link="https://insta.com/sarahden")
     jamie = Instructor(name="Jamie Kart", city="London", phone="00000000001",
-                       img_link="https://test.com", email="jamiekart@mail.com", insta_link="https://insta.com/jamiedoesyoga")
+                       img_link="/images/jamiekart.jpg", email="jamiekart@mail.com", insta_link="https://insta.com/jamiedoesyoga")
     daisy = Instructor(name="Daisy Meadow", city="Bristol", phone="00000000005",
-                       img_link="https://test.com", email="daisymeadow@mail.com", insta_link="https://insta.com/missmeadow")
+                       img_link="/images/daisymeadow.jpg", email="daisymeadow@mail.com", insta_link="https://insta.com/missmeadow")
     bikram = ClassType(title="Bikram")
     vinyasa = ClassType(title="Vinyasa")
     inyengar = ClassType(title="Iyengar")
@@ -81,6 +82,7 @@ def clear():
 app.cli.add_command(seed_cli)
 
 
+
 @app.route('/')
 def index():
     return render_template('pages/home.html')
@@ -92,6 +94,11 @@ def list_instructors():
 @app.route('/instructors/<id>')
 def instructor(id):
     return render_template('pages/instructor.html', instructor = Instructor.query.get(id))
+
+@app.route('/images/<filename>')
+def uploaded_img(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
 
 if __name__ == '__main__':
     app.run()
