@@ -9,8 +9,9 @@ verify_ssl = true
 flask-migrate = "*"
 flask = "*"
 flask-sqlalchemy = "*"
-dotenv = "*"
 psycopg2 = "*"
+python-dotenv = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
