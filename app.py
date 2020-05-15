@@ -135,6 +135,10 @@ def index():
 def list_instructors():
     return render_template('pages/instructors.html', instructors=Instructor.query.all())
 
+@app.route('/venues')
+def list_venues():
+    return render_template('pages/venues.html', venues=Venue.query.all())
+
 
 @app.route('/instructors/<id>')
 def instructor(id):

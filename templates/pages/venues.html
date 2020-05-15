@@ -1,0 +1,21 @@
+{% extends 'layouts/main.html' %}
+{% block content %}
+<div class="row">
+  <div class="col-sm-6 p-5">
+    <h2>Venues</h2>
+
+    {% for venue in venues %}
+    <a href="/venues/{{ venue.id }}" class="m-2">
+      <div class="card">
+        <div class="card-body">{{ venue.name }}
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+
+  </div>
+  <div class="col-sm-6 p-5">
+    <img class="img-fluid" src="/static/img/yoga_on_beach.jpg" alt="group doing yoga on the beach">
+  </div>
+</div>
+{% endblock %}
