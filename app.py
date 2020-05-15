@@ -44,7 +44,7 @@ class ClassType(db.Model):
 @seed_cli.command('seed')
 def seed():
     sarah = Instructor(name="Sarah Den", city="London", phone="00000000000",
-                       img_link="/images/daisymeadow.jpg", email="sarahden@mail.com", insta_link="https://insta.com/sarahden")
+                       img_link="/images/sarahden.jpg", email="sarahden@mail.com", insta_link="https://insta.com/sarahden")
     jamie = Instructor(name="Jamie Kart", city="London", phone="00000000001",
                        img_link="/images/jamiekart.jpg", email="jamiekart@mail.com", insta_link="https://insta.com/jamiedoesyoga")
     daisy = Instructor(name="Daisy Meadow", city="Bristol", phone="00000000005",
