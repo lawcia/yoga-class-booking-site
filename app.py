@@ -12,7 +12,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
-# Models
 
 instructor_class_type = db.Table('instructor_class_type',
                                  db.Column('instructor_id', db.Integer,
@@ -20,6 +19,13 @@ instructor_class_type = db.Table('instructor_class_type',
                                  db.Column('class_type_id', db.Integer,
                                            db.ForeignKey('class_type.id'), primary_key=True)
                                  )
+
+venue_feature = db.Table('venue_feature',
+                         db.Column('venue_id', db.Integer, db.ForeignKey(
+                             'venue.id'), primary_key=True),
+                         db.Column('feature_id', db.Integer, db.ForeignKey(
+                             'feature.id'), primary_key=True)
+                         )
 
 
 class Instructor(db.Model):
@@ -39,6 +45,26 @@ class ClassType(db.Model):
     __tablename__ = 'class_type'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(120), nullable=False, unique=True)
+
+
+class Venue(db.Model):
+    __tablename__ = 'venue'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(300), nullable=False)
+    city = db.Column(db.String(120), nullable=False)
+    phone = db.Column(db.String(120), nullable=False, unique=True)
+    img_link = db.Column(db.String(500), nullable=False)
+    email = db.Column(db.String(120), nullable=False, unique=True)
+    insta_link = db.Column(db.String(500), nullable=True)
+    features = db.relationship(
+        'Feature', secondary=venue_feature, lazy='subquery', backref=db.backref('venues', lazy=True)
+    )
+
+
+class Feature(db.Model):
+    __tablename__ = 'feature'
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(300), nullable=False)
 
 
 @seed_cli.command('seed')
@@ -82,23 +108,26 @@ def clear():
 app.cli.add_command(seed_cli)
 
 
-
 @app.route('/')
 def index():
     return render_template('pages/home.html')
 
+
 @app.route('/instructors')
-def list_instructors(): 
-    return render_template('pages/instructors.html', instructors = Instructor.query.all())
+def list_instructors():
+    return render_template('pages/instructors.html', instructors=Instructor.query.all())
+
 
 @app.route('/instructors/<id>')
 def instructor(id):
-    return render_template('pages/instructor.html', instructor = Instructor.query.get(id))
+    return render_template('pages/instructor.html', instructor=Instructor.query.get(id))
+
 
 @app.route('/images/<filename>')
 def uploaded_img(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
+
 
 if __name__ == '__main__':
     app.run()
