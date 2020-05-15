@@ -22,3 +22,19 @@ The relationships between venues and yoga instructors is modelled below.
 2. Clear the database
 
 ``` flask seed clear ```
+
+3. Make migrations
+
+``` flask db migrate ```
+
+4. Upgrade database
+
+``` flask db upgrade ```
+
+5. Set development environment
+
+``` export FLASK_ENV=development ```
+
+6. Start project
+
+``` flask run ```
