@@ -12,7 +12,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 
-
 instructor_class_type = db.Table('instructor_class_type',
                                  db.Column('instructor_id', db.Integer,
                                            db.ForeignKey('instructor.id'), primary_key=True),
@@ -56,6 +55,7 @@ class Venue(db.Model):
     img_link = db.Column(db.String(500), nullable=False)
     email = db.Column(db.String(120), nullable=False, unique=True)
     insta_link = db.Column(db.String(500), nullable=True)
+    capacity = db.Column(db.Integer, nullable=False)
     features = db.relationship(
         'Feature', secondary=venue_feature, lazy='subquery', backref=db.backref('venues', lazy=True)
     )
@@ -80,11 +80,28 @@ def seed():
     inyengar = ClassType(title="Iyengar")
     aerial = ClassType(title="Aerial")
     yin = ClassType(title="Yin")
+    green_lake = Venue(name="Green Lake", city="London", phone="07800000000", img_link="/images/park.jpg",
+                       email="greenlake@mail.com", insta_link="https://insta.com/greenlake", capacity=300)
+    old_hall = Venue(name="Old Hall", city="London", phone="07500000000", img_link="/images/glass_window_hall.jpg",
+                     email="oldhall@mail.com", insta_link="https://insta.com/oldhall", capacity=60)
+    gallery = Venue(name="Gallery", city="Bristol", phone="07600000000", img_link="/images/gallery",
+                    email="bristolgallery@mail.com", insta_link="https://insta.com/bristolgallery", capacity=20)
+    cafe = Feature(description="Cafe")
+    changing_room = Feature(description="Changing room")
+    parking = Feature(description="Parking")
+    gym = Feature(description="Gym")
+    swimming = Feature(description="Swimming pool")
+    mats = Feature(description="Mats")
+
     sarah.class_types.extend([bikram, vinyasa, yin])
     jamie.class_types.extend([vinyasa, inyengar, yin])
     daisy.class_types.extend([vinyasa, aerial])
+    old_hall.features.extend([changing_room, mats, parking])
+    green_lake.features.extend([swimming, parking, cafe])
+    gallery.features.extend([mats, gym, changing_room])
+
     db.session.add_all(
-        [sarah, jamie, daisy, bikram, vinyasa, inyengar, aerial])
+        [sarah, jamie, daisy, bikram, vinyasa, inyengar, aerial, green_lake, old_hall, gallery, cafe, changing_room, parking, gym, swimming, mats])
     db.session.commit()
 
 
