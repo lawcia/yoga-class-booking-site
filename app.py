@@ -3,10 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask.cli import AppGroup
 from werkzeug.utils import secure_filename
+from config import Config
 
 app = Flask(__name__)
 seed_cli = AppGroup('seed')
-app.config.from_object('config')
+app.config.from_object(Config)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
