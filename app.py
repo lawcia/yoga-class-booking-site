@@ -85,7 +85,7 @@ def seed():
                        email="greenlake@mail.com", insta_link="https://insta.com/greenlake", capacity=300)
     old_hall = Venue(name="Old Hall", city="London", phone="07500000000", img_link="/images/glass_window_hall.jpg",
                      email="oldhall@mail.com", insta_link="https://insta.com/oldhall", capacity=60)
-    gallery = Venue(name="Gallery", city="Bristol", phone="07600000000", img_link="/images/gallery",
+    gallery = Venue(name="Gallery", city="Bristol", phone="07600000000", img_link="/images/gallery.jpg",
                     email="bristolgallery@mail.com", insta_link="https://insta.com/bristolgallery", capacity=20)
     cafe = Feature(description="Cafe")
     changing_room = Feature(description="Changing room")
@@ -112,10 +112,16 @@ def clear():
     try:
         instructors = Instructor.query.all()
         classtypes = ClassType.query.all()
+        venues = Venue.query.all()
+        features = Feature.query.all()
         for instructor in instructors:
             db.session.delete(instructor)
         for classtype in classtypes:
             db.session.delete(classtype)
+        for venue in venues:
+            db.session.delete(venue)
+        for feature in features:
+            db.session.delete(feature)
         db.session.commit()
         print('done')
     except:
@@ -144,6 +150,9 @@ def list_venues():
 def instructor(id):
     return render_template('pages/instructor.html', instructor=Instructor.query.get(id))
 
+@app.route('/venues/<id>')
+def venue(id):
+    return render_template('pages/venue.html', venue=Venue.query.get(id))
 
 @app.route('/images/<filename>')
 def uploaded_img(filename):
