@@ -145,6 +145,9 @@ def list_instructors():
 def list_venues():
     return render_template('pages/venues.html', venues=Venue.query.all())
 
+@app.route('/instructors/create')
+def create_instructors():
+    return 
 
 @app.route('/instructors/<id>')
 def instructor(id):
