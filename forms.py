@@ -1,4 +1,4 @@
-from wtforms import SelectField, validators, SubmitField, SelectMultipleField
+from wtforms import SelectField, validators, SubmitField, SelectMultipleField, RadioField
 from flask_wtf import FlaskForm
 
 class CreateInstructorForm(FlaskForm):
@@ -21,4 +21,5 @@ class CreateInstructorForm(FlaskForm):
   class_types = SelectMultipleField('Class Types', choices=[
     ('Bikram', 'Bikram'), ('Vinyasa', 'Vinyasa'), ('Iyengar', 'Iyengar'), ('Aerial', 'Aerial'), ('Yin', 'Yin')
   ])
+  pictures = RadioField('Picture', choices=[('/images/woman_in_sun.jpg', 'Picture 1'), ('/images/woman_hand_pose.jpg', 'Picture 2')], default='/images/woman_in_sun.jpg')
   submit = SubmitField(label='Create Instructor')

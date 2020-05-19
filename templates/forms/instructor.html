@@ -54,10 +54,26 @@
       <small>Ctrl+Click to select multiple</small>
     </div>
   </div>
-    <div class="form-group">
-      <label for="picture">Picture</label>
-      
+  <div class="form-row">
+ 
+    <div class="form-group col-sm">
+      {{ form.pictures.label }}
+      {{ form.pictures(class_ = 'radio-group') }}
     </div>
+    <div class="form-group col-sm p-2">
+      <div class="card" style="width: 18rem;">
+        <img  src="/images/woman_in_sun.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <p class="card-text" id="picture_text"></p>
+        </div>
+      </div>
+    </div>
+
+    {% if form.pictures.errors %}
+      {% for error in form.pictures.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
+  </div>
+
     {{ form.submit(class_ = 'btn btn-success btn-lg btn-block')}}
   </form>
 </div>

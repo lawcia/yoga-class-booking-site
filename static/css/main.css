@@ -73,3 +73,7 @@ a.link{
 .home-col {
   padding: 16px;
 }
+
+.radio-group li{
+  list-style-type: none;
+}
