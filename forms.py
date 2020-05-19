@@ -1,5 +1,24 @@
-from wtforms import Form, StringField, validators
+from wtforms import SelectField, validators, SubmitField, SelectMultipleField
+from flask_wtf import FlaskForm
 
-class CreateInstructorForm(Form):
-  name = StringField('Name', [validators.Length(min=2, max=300), validators.DataRequired('You must enter a name')])
-  
+class CreateInstructorForm(FlaskForm):
+  name = SelectField('Name', choices=[('Alex Heart', 'Alex Heart'), ('Sam Doe', 'Sam Doe'), ('Noah Smith', 'Noah Smith'), ('Toyah Tyler', 'Toyah Tyler')])
+  city = SelectField('City', choices=[('london', 'London'), ('bristol', 'Bristol'), ('brighton', 'Brighton')])
+  phone = SelectField('Phone', choices=[('07801000000','07801000000'), ('07802000000','07802000000'), ('07803000000','07803000000'), ('07804000000','07804000000'), ('07805000000','07805000000')])
+  email = SelectField('Email', choices=[
+    ('yogamaster@mail.com', 'yogamaster@mail.com'),
+    ('fityoga@mail.com', 'fityoga@mail.com'),
+    ('yoga@mail.com', 'yoga@mail.com'),
+    ('ayogateacher@mail.com', 'ayogateacher@mail.com')
+  ])
+  instagram = SelectField('Instagram', choices=[
+    ('https://insta.com/yoga', 'https://insta.com/yoga'),
+     ('https://insta.com/angelyoga', 'https://insta.com/angelyoga'),
+        ('https://insta.com/downwarddog', 'https://insta.com/downwarddog'),
+           ('https://insta.com/spinningturtle', 'https://insta.com/spinningturtle'),
+              ('https://insta.com/missmryoga', 'https://insta.com/missmryoga')
+  ])
+  class_types = SelectMultipleField('Class Types', choices=[
+    ('Bikram', 'Bikram'), ('Vinyasa', 'Vinyasa'), ('Iyengar', 'Iyengar'), ('Aerial', 'Aerial'), ('Yin', 'Yin')
+  ])
+  submit = SubmitField(label='Create Instructor')

@@ -1,9 +1,10 @@
-from flask import Flask, render_template, send_from_directory
+from flask import Flask, render_template, send_from_directory, redirect, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask.cli import AppGroup
 from werkzeug.utils import secure_filename
 from config import Config
+from forms import CreateInstructorForm
 
 app = Flask(__name__)
 seed_cli = AppGroup('seed')
@@ -145,9 +146,13 @@ def list_instructors():
 def list_venues():
     return render_template('pages/venues.html', venues=Venue.query.all())
 
-@app.route('/instructors/create')
+@app.route('/instructors/create', methods=['GET', 'POST'])
 def create_instructors():
-    return render_template('forms/instructor.html')
+    form = CreateInstructorForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        print(form.name.data)
+        return redirect('/')
+    return render_template('forms/instructor.html', form=form)
 
 @app.route('/instructors/<id>')
 def instructor(id):

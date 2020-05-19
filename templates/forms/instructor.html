@@ -1,36 +1,64 @@
-{% extends 'layouts/main.html' %}
+{% extends 'layouts/form.html' %}
 {% block title %}New Instructor{% endblock %}
 {% block content %}
 <div class="form-wrapper p-5">
   <form method="post" class="form">
+    {{ form.csrf_token }}
     <h3 class="form-heading">New Instructor</h3>
-    <div class="form-group">
-      <label for="name">Name</label>
-    </div>
-    <div class="form-group">
-      <label>City</label>
-      <div class="form-inline">
-        <div class="form-group">
-        </div>
+    <div class="form-row">
+      <div class="form-group col-sm-6">
+        {{ form.name.label }}
+        {{ form.name(class_ = 'form-control', autofocus = true) }}
+        {% if form.name.errors %}
+        {% for error in form.name.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+    {% endif %}
+      </div>
+      <div class="form-group col-sm-6">
+        {{ form.city.label }}
+        {{ form.city(class_ = 'form-control', autofocus = true) }}
+        {% if form.city.errors %}
+        {% for error in form.city.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+    {% endif %}
       </div>
     </div>
-    <div class="form-group">
-      <label for="phone">Phone</label>
+    <div class="form-row">
+    <div class="form-group col-sm-6">
+      {{ form.phone.label }}
+      {{ form.phone(class_ = 'form-control', autofocus = true) }}
+      {% if form.phone.errors %}
+      {% for error in form.phone.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
     </div>
-    <div class="form-group">
-      <label for="email">Email</label>
+    <div class="form-group col-sm-6">
+      {{ form.email.label }}
+      {{ form.email(class_ = 'form-control', autofocus = true) }}
+      {% if form.email.errors %}
+      {% for error in form.email.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
     </div>
-    <div class="form-group">
-      <label for="instagram">Instagram</label>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-sm-6">
+      {{ form.instagram.label }}
+      {{ form.instagram(class_ = 'form-control', autofocus = true) }}
+      {% if form.instagram.errors %}
+      {% for error in form.instagram.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
     </div>
-    <div class="form-group">
-      <label for="class-types">Class Types</label>
+    <div class="form-group col-sm-6">
+      {{ form.class_types.label }}
+      {{ form.class_types(class_ = 'form-control', autofocus = true) }}
+      {% if form.class_types.errors %}
+      {% for error in form.class_types.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
       <small>Ctrl+Click to select multiple</small>
     </div>
+  </div>
     <div class="form-group">
       <label for="picture">Picture</label>
+      
     </div>
-    <input type="submit" value="Create Instructor" class="btn btn-success btn-lg btn-block">
+    {{ form.submit(class_ = 'btn btn-success btn-lg btn-block')}}
   </form>
 </div>
 {% endblock %}

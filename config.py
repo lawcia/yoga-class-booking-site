@@ -4,7 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SECRET_KEY = os.urandom(32)
 basedir = os.path.abspath(os.path.dirname(__file__))
 FLASK_ENV = os.getenv('FLASK_ENV')
 
@@ -24,3 +23,4 @@ class Config(object):
   SQLALCHEMY_TRACK_MODIFICATIONS = False
   UPLOAD_FOLDER = basedir + '/assets'
   ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+  SECRET_KEY = os.urandom(32)
