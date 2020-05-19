@@ -147,7 +147,7 @@ def list_venues():
 
 @app.route('/instructors/create')
 def create_instructors():
-    return 
+    return render_template('forms/instructor.html')
 
 @app.route('/instructors/<id>')
 def instructor(id):

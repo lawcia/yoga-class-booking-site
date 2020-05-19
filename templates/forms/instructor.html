@@ -1,0 +1,36 @@
+{% extends 'layouts/main.html' %}
+{% block title %}New Instructor{% endblock %}
+{% block content %}
+<div class="form-wrapper p-5">
+  <form method="post" class="form">
+    <h3 class="form-heading">New Instructor</h3>
+    <div class="form-group">
+      <label for="name">Name</label>
+    </div>
+    <div class="form-group">
+      <label>City</label>
+      <div class="form-inline">
+        <div class="form-group">
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="phone">Phone</label>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+    </div>
+    <div class="form-group">
+      <label for="instagram">Instagram</label>
+    </div>
+    <div class="form-group">
+      <label for="class-types">Class Types</label>
+      <small>Ctrl+Click to select multiple</small>
+    </div>
+    <div class="form-group">
+      <label for="picture">Picture</label>
+    </div>
+    <input type="submit" value="Create Instructor" class="btn btn-success btn-lg btn-block">
+  </form>
+</div>
+{% endblock %}
