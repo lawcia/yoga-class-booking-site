@@ -1,1 +1,1 @@
-web: gunicorn yogabook:yogabook
+web: gunicorn yogabook:app
