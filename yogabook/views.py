@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, send_from_directory, flash
 from . import app, db
-from .models import Instructor, Venue
+from .models import Instructor, Venue, Feature, ClassType
 from .forms import CreateInstructorForm
 
 @app.route('/')
@@ -28,15 +28,17 @@ def create_instructors():
             insta = form.instagram.data
             classes = form.class_types.data
             pic = form.pictures.data
-            newInstructor = Instructor(name=name, city=city, phone=phone,
+            new_instructor = Instructor(name=name, city=city, phone=phone,
                        img_link=pic, email=email, insta_link=insta)
-            newInstructor.class_types.extend(classes)
-            db.session.add(newInstructor)
+            for class_type in classes:
+                new_class = ClassType.query.filter_by(title=class_type).first_or_404()
+                new_instructor.class_types.append(new_class)
+            db.session.add(new_instructor)
             db.session.commit()
         except Exception as error:
-            print(error)
             flash('something went wrong!', 'message')
-        else: 
+        else:
+            flash('Instructor was successfully added!')
             return redirect('/')
         
     return render_template('forms/instructor.html', form=form)

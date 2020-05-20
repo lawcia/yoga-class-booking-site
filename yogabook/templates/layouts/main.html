@@ -39,12 +39,27 @@
       </nav>
 
       <main class="container-fluid main">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <div class="p-1">
+          {% for message in messages %}
+            <div class="alert alert-warning">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+      {% endwith %}
         {% block content %}{% endblock %}
       </main>
     </div>
     <footer class="footer">
       <p>Yogabook &copy; 2020 Created by <a href="https://github.com/lawcia">Lawrencia</a></p>
     </footer>
+    <script src="/static/js/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
     </script>
