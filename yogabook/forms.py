@@ -18,8 +18,9 @@ class CreateInstructorForm(FlaskForm):
            ('https://insta.com/spinningturtle', 'https://insta.com/spinningturtle'),
               ('https://insta.com/missmryoga', 'https://insta.com/missmryoga')
   ])
-  class_types = SelectMultipleField('Class Types', choices=[
+  class_types = SelectMultipleField('Class Types', [validators.DataRequired()], choices=[
     ('Bikram', 'Bikram'), ('Vinyasa', 'Vinyasa'), ('Iyengar', 'Iyengar'), ('Aerial', 'Aerial'), ('Yin', 'Yin')
   ])
   pictures = RadioField('Picture', choices=[('/images/woman_in_sun.jpg', 'Picture 1'), ('/images/woman_hand_pose.jpg', 'Picture 2'), ('/images/man_sweater.jpg', 'Picture 3'), ('/images/woman_sunglasses.jpg', 'Picture 4')], default='/images/woman_in_sun.jpg')
   submit = SubmitField(label='Create Instructor')
+  

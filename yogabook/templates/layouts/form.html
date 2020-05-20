@@ -40,14 +40,19 @@
       <main class="container-fluid main">
         {% with messages = get_flashed_messages() %}
         {% if messages %}
+        <div class="p-1">
           {% for message in messages %}
-            <div class="alert alert-warning fade in">
-              <a class="close" data-dismiss="alert">&times;</a>
+            <div class="alert alert-warning">
               {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
           {% endfor %}
+        </div>
         {% endif %}
       {% endwith %}
+ 
         {% block content %}{% endblock %}
       </main>
     </div>
