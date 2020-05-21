@@ -38,20 +38,27 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="form-group col-sm-6">
+    <div class="form-group col-sm-4">
       {{ form.instagram.label }}
       {{ form.instagram(class_ = 'form-control', autofocus = true) }}
       {% if form.instagram.errors %}
       {% for error in form.instagram.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
   {% endif %}
     </div>
-    <div class="form-group col-sm-6">
+    <div class="form-group col-sm-4">
       {{ form.features.label }}
       {{ form.features(class_ = 'form-control', autofocus = true) }}
       {% if form.features.errors %}
       {% for error in form.features.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
   {% endif %}
       <small>Ctrl+Click to select multiple</small>
+    </div>
+    <div class="form-group col-sm-4">
+      {{ form.capacity.label }}
+      {{ form.capacity(class_ = 'form-control', autofocus = true) }}
+      {% if form.capacity.errors %}
+      {% for error in form.capacity.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
     </div>
   </div>
   <div class="form-row">
@@ -62,7 +69,7 @@
     </div>
     <div class="form-group col-sm p-2">
       <div class="card" style="width: 18rem;">
-        <img  id="form_picture" src="/images/woman_in_sun.jpg" class="card-img-top" alt="select photo">
+        <img  id="form_picture" src="/images/old_lost_hall.jpg" class="card-img-top" alt="select photo">
         <div class="card-body">
           <p class="card-text" id="picture_text">Selected photo</p>
         </div>

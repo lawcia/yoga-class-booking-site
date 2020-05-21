@@ -100,14 +100,14 @@ class CreateVenueForm(FlaskForm):
                                                ('Gym', 'Gym'),
                                                ('Swimming pool', 'Swimming pool'),
                                                ('Mats', 'Mats')])
-    capacity = IntegerField('Capacity', [validators.DataRequired()])
-    pictures = RadioField('Picture', choices=[('/images/old_lost_hall', 'Picture 1'),
+    capacity = IntegerField('Capacity', [validators.DataRequired('Please enter a number')])
+    pictures = RadioField('Picture', choices=[('/images/old_lost_hall.jpg', 'Picture 1'),
                                               ('/images/gym_dark.jpg',
                                                'Picture 2'),
                                               ('/images/future_hall.jpg',
                                                'Picture 3'),
                                               ('/images/old_gym.jpg', 'Picture 4')],
-                          default='/images/old_gym.jpg')
+                          default='/images/old_lost_hall.jpg')
     submit = SubmitField(label='Create Venue')
 
     def validate_name(self, field):
@@ -123,6 +123,7 @@ class CreateVenueForm(FlaskForm):
             raise ValidationError('This email has been taken')
 
     def validate_capacity(self, field):
-        if field.data > 9 and field.data < 501:
+        if field.data < 10 or field.data > 500:
             raise ValidationError('Please enter a capacity between 10 and 500')
+
 

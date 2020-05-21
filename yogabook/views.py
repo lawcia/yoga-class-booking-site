@@ -54,16 +54,17 @@ def create_venues():
             phone = form.phone.data
             insta = form.instagram.data
             capacity = form.capacity.data
-            features = form.features.data
+            venue_features = form.features.data
             pic = form.pictures.data
             new_venue = Venue(name=name, city=city, phone=phone,
                        img_link=pic, email=email, insta_link=insta, capacity=capacity)
-            for feature in features:
-                new_venue = Feature.query.filter_by(description=feature).first_or_404()
-                new_venue.features.append(feature)
+            for feature in venue_features:
+                new_feature = Feature.query.filter_by(description=feature).first_or_404()
+                new_venue.features.append(new_feature)
             db.session.add(new_venue)
             db.session.commit()
         except Exception as error:
+            print(error)
             flash('something went wrong!', 'message')
         else:
             flash(f'Venue {name} was successfully added!')
