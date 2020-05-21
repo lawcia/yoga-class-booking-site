@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, send_from_directory, flash
 from . import app, db
 from .models import Instructor, Venue, Feature, ClassType
-from .forms import CreateInstructorForm
+from .forms import CreateInstructorForm, CreateVenueForm
 
 @app.route('/')
 def index():
@@ -42,6 +42,34 @@ def create_instructors():
             return redirect('/')
         
     return render_template('forms/instructor.html', form=form)
+
+@app.route('/venues/create', methods=['GET', 'POST'])
+def create_venues():
+    form = CreateVenueForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        try:
+            name = form.name.data
+            city = form.city.data
+            email = form.email.data
+            phone = form.phone.data
+            insta = form.instagram.data
+            capacity = form.capacity.data
+            features = form.features.data
+            pic = form.pictures.data
+            new_venue = Venue(name=name, city=city, phone=phone,
+                       img_link=pic, email=email, insta_link=insta, capacity=capacity)
+            for feature in features:
+                new_venue = Feature.query.filter_by(description=feature).first_or_404()
+                new_venue.features.append(feature)
+            db.session.add(new_venue)
+            db.session.commit()
+        except Exception as error:
+            flash('something went wrong!', 'message')
+        else:
+            flash(f'Venue {name} was successfully added!')
+            return redirect('/')
+        
+    return render_template('forms/venue.html', form=form)
 
 @app.route('/instructors/<id>')
 def instructor(id):
