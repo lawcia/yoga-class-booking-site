@@ -81,7 +81,7 @@ class CreateVenueForm(FlaskForm):
     email = SelectField('Email', choices=[('kickstart@mail.com', 'kickstart@mail.com'),
                                           ('studio@mail.com', 'studio@mail.com'),
                                           ('venue@mail.com', 'venue@mail.com'),
-                                          ('yogadome@mail.com', 'yogadomer@mail.com')])
+                                          ('yogadome@mail.com', 'yogadome@mail.com')])
     instagram = SelectField('Instagram', choices=[('https://insta.com/studio',
                                                    'https://insta.com/studio'),
                                                   ('https://insta.com/venue',
