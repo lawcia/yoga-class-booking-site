@@ -1,0 +1,78 @@
+{% extends 'layouts/main.html' %}
+{% block title %}New Venue{% endblock %}
+{% block content %}
+<div class="form-wrapper p-5">
+  <form method="post" class="form">
+    {{ form.csrf_token }}
+    <h3 class="form-heading">New Venue</h3>
+    <div class="form-row">
+      <div class="form-group col-sm-6">
+        {{ form.name.label }}
+        {{ form.name(class_ = 'form-control', autofocus = true) }}
+        {% if form.name.errors %}
+        {% for error in form.name.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+    {% endif %}
+      </div>
+      <div class="form-group col-sm-6">
+        {{ form.city.label }}
+        {{ form.city(class_ = 'form-control', autofocus = true) }}
+        {% if form.city.errors %}
+        {% for error in form.city.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+    {% endif %}
+      </div>
+    </div>
+    <div class="form-row">
+    <div class="form-group col-sm-6">
+      {{ form.phone.label }}
+      {{ form.phone(class_ = 'form-control', autofocus = true) }}
+      {% if form.phone.errors %}
+      {% for error in form.phone.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
+    </div>
+    <div class="form-group col-sm-6">
+      {{ form.email.label }}
+      {{ form.email(class_ = 'form-control', autofocus = true) }}
+      {% if form.email.errors %}
+      {% for error in form.email.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-sm-6">
+      {{ form.instagram.label }}
+      {{ form.instagram(class_ = 'form-control', autofocus = true) }}
+      {% if form.instagram.errors %}
+      {% for error in form.instagram.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
+    </div>
+    <div class="form-group col-sm-6">
+      {{ form.features.label }}
+      {{ form.features(class_ = 'form-control', autofocus = true) }}
+      {% if form.features.errors %}
+      {% for error in form.features.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
+      <small>Ctrl+Click to select multiple</small>
+    </div>
+  </div>
+  <div class="form-row">
+ 
+    <div class="form-group col-sm">
+      {{ form.pictures.label }}
+      {{ form.pictures(class_ = 'radio-group') }}
+    </div>
+    <div class="form-group col-sm p-2">
+      <div class="card" style="width: 18rem;">
+        <img  id="form_picture" src="/images/woman_in_sun.jpg" class="card-img-top" alt="select photo">
+        <div class="card-body">
+          <p class="card-text" id="picture_text">Selected photo</p>
+        </div>
+      </div>
+    </div>
+    {% if form.pictures.errors %}
+      {% for error in form.pictures.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
+  {% endif %}
+  </div>
+    {{ form.submit(class_ = 'btn btn-success btn-lg btn-block')}}
+  </form>
+</div>
+{% endblock %}
