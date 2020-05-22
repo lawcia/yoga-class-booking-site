@@ -7,6 +7,7 @@ instructor_class_type = db.Table('instructor_class_type',
                                            db.ForeignKey('class_type.id'), primary_key=True)
                                  )
 
+
 venue_feature = db.Table('venue_feature',
                          db.Column('venue_id', db.Integer, db.ForeignKey(
                              'venue.id'), primary_key=True),
@@ -14,10 +15,12 @@ venue_feature = db.Table('venue_feature',
                              'feature.id'), primary_key=True)
                          )
 
+
 class YogaClass(db.Model):
     __tablename__ = 'yogaclass'
-    instructor_id = db.Column(db.Integer, db.ForeignKey('instructor.id'), primary_key=True)
-    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'), primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    instructor_id = db.Column(db.Integer, db.ForeignKey('instructor.id'))
+    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'))
     class_start = db.Column(db.DateTime, nullable=False)
     class_end = db.Column(db.DateTime, nullable=False)
     venue = db.relationship('Venue', back_populates='instructors')
