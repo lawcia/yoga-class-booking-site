@@ -1,3 +1,4 @@
+import os
 from flask import Flask
 from flask.cli import AppGroup
 from .config import Config
@@ -8,7 +9,8 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+basedir = os.path.abspath(os.path.dirname(__file__))
+migrate = Migrate(app, db, directory=os.path.join(basedir, 'migrations'))
 
 
 from . import views, commands

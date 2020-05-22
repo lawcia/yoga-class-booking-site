@@ -14,6 +14,15 @@ venue_feature = db.Table('venue_feature',
                              'feature.id'), primary_key=True)
                          )
 
+class YogaClass(db.Model):
+    __tablename__ = 'yogaclass'
+    instructor_id = db.Column(db.Integer, db.ForeignKey('instructor.id'), primary_key=True)
+    venue_id = db.Column(db.Integer, db.ForeignKey('venue.id'), primary_key=True)
+    class_start = db.Column(db.DateTime, nullable=False)
+    class_end = db.Column(db.DateTime, nullable=False)
+    venue = db.relationship('Venue', back_populates='instructors')
+    instructor = db.relationship('Instructor', back_populates='venues')
+
 
 class Instructor(db.Model):
     __tablename__ = 'instructor'
@@ -26,6 +35,7 @@ class Instructor(db.Model):
     insta_link = db.Column(db.String(500), nullable=True)
     class_types = db.relationship(
         'ClassType', secondary=instructor_class_type, lazy='subquery', backref=db.backref('instructors', lazy=True))
+    venues = db.relationship('YogaClass', back_populates='instructor')
 
 
 class ClassType(db.Model):
@@ -47,6 +57,7 @@ class Venue(db.Model):
     features = db.relationship(
         'Feature', secondary=venue_feature, lazy='subquery', backref=db.backref('venues', lazy=True)
     )
+    instructors = db.relationship('YogaClass', back_populates='venue')
 
 
 class Feature(db.Model):
