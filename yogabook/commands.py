@@ -44,18 +44,18 @@ def seed():
     yoga_class1 = YogaClass(class_start=datetime(2020, 5, 27, 17), class_end=datetime(2020, 5, 27, 19))
     yoga_class1.instructor = sarah
     yoga_class1.venue = gallery
-    # yoga_class2 = YogaClass(class_start=datetime(2020, 5, 22, 17,30), class_end=datetime(2020, 5, 22, 19, 30))
-    # yoga_class2.instructor = jamie
-    # yoga_class2.venue = old_hall
-    # yoga_class3 = YogaClass(class_start=datetime(2020, 6, 1, 17, 30), class_end=datetime(2020, 6, 1, 19, 30))
-    # yoga_class3.instructor = jamie
-    # yoga_class3.venue = old_hall
-    # yoga_class4 = YogaClass(class_start=datetime(2020, 7, 5, 14), class_end=datetime(2020, 7, 5, 15))
-    # yoga_class4.instructor = daisy
-    # yoga_class4.venue = green_lake
+    yoga_class2 = YogaClass(class_start=datetime(2020, 5, 22, 17,30), class_end=datetime(2020, 5, 22, 19, 30))
+    yoga_class2.instructor = jamie
+    yoga_class2.venue = old_hall
+    yoga_class3 = YogaClass(class_start=datetime(2020, 6, 1, 17, 30), class_end=datetime(2020, 6, 1, 19, 30))
+    yoga_class3.instructor = jamie
+    yoga_class3.venue = old_hall
+    yoga_class4 = YogaClass(class_start=datetime(2020, 7, 5, 14), class_end=datetime(2020, 7, 5, 15))
+    yoga_class4.instructor = daisy
+    yoga_class4.venue = green_lake
 
     db.session.add_all(
-        [sarah, jamie, daisy, bikram, vinyasa, inyengar, aerial, green_lake, old_hall, gallery, cafe, changing_room, parking, gym, swimming, mats, yoga_class, yoga_class1])
+        [sarah, jamie, daisy, bikram, vinyasa, inyengar, aerial, green_lake, old_hall, gallery, cafe, changing_room, parking, gym, swimming, mats, yoga_class, yoga_class1, yoga_class2, yoga_class3, yoga_class4])
     db.session.commit()
 
 
