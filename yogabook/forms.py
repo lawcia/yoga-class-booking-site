@@ -1,6 +1,6 @@
-from wtforms import SelectField, validators, SubmitField, SelectMultipleField, RadioField, ValidationError, IntegerField
+from wtforms import SelectField, validators, SubmitField, SelectMultipleField, RadioField, ValidationError, IntegerField, DateTimeField
 from flask_wtf import FlaskForm
-from .models import Instructor, Venue
+from .models import Instructor, Venue, YogaClass
 from . import db
 
 
@@ -126,4 +126,17 @@ class CreateVenueForm(FlaskForm):
         if field.data < 10 or field.data > 500:
             raise ValidationError('Please enter a capacity between 10 and 500')
 
+
+class CreateClassForm(FlaskForm):
+    instructor_id = IntegerField('Instructor ID', [validators.DataRequired('Please enter an instructor ID')])
+    venue_id = IntegerField('Venue ID', [validators.DataRequired('Please enter a venue ID')])
+    start_time = DateTimeField('Class date & time', [validators.DataRequired('Please enter a start time')])
+    duration = IntegerField('Class duration', [validators.DataRequired('Please enter a class duration')])
+    frequency = SelectField('Frequency', [validators.DataRequired()], choices=[('once', 'once'), 
+    ('weekly', 'weekly'),
+    ('monthly', 'monthly')])
+
+    def validate_instructor_id(self, field):
+        if not Instructor.query.get(field.data):
+            raise ValidationError('Please enter a valid instructor ID')
 

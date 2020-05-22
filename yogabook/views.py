@@ -3,10 +3,10 @@ from . import app, db
 from .models import Instructor, Venue, Feature, ClassType
 from .forms import CreateInstructorForm, CreateVenueForm
 
+
 @app.route('/')
 def index():
     return render_template('pages/home.html')
-
 
 @app.route('/instructors')
 def list_instructors():
@@ -64,7 +64,6 @@ def create_venues():
             db.session.add(new_venue)
             db.session.commit()
         except Exception as error:
-            print(error)
             flash('something went wrong!', 'message')
         else:
             flash(f'Venue {name} was successfully added!')
