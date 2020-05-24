@@ -1,6 +1,6 @@
 from flask import render_template, request, redirect, send_from_directory, flash
 from . import app, db
-from .models import Instructor, Venue, Feature, ClassType
+from .models import Instructor, Venue, Feature, ClassType, YogaClass
 from .forms import CreateInstructorForm, CreateVenueForm, CreateClassForm
 
 
@@ -15,6 +15,11 @@ def list_instructors():
 @app.route('/venues')
 def list_venues():
     return render_template('pages/venues.html', venues=Venue.query.all())
+
+@app.route('/classes')
+def list_classes():
+    classes = YogaClass.query.all()
+    return render_template('pages/classes.html', classes=classes)
 
 @app.route('/instructors/create', methods=['GET', 'POST'])
 def create_instructors():
