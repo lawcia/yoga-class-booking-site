@@ -135,6 +135,7 @@ class CreateClassForm(FlaskForm):
     frequency = SelectField('Frequency', [validators.DataRequired()], choices=[('once', 'once'), 
     ('weekly', 'weekly'),
     ('monthly', 'monthly')])
+    submit = SubmitField(label='Promote Class')
 
     def validate_instructor_id(self, field):
         if not Instructor.query.get(field.data):
