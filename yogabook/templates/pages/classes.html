@@ -1,0 +1,16 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Classes{% endblock %}
+{% block content %}
+<div class="card-columns p-5">
+      {% for yoga_class in classes %}
+      <div class="card" style="width: 18rem;">
+        <img src="{{ yoga_class.picture }}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ yoga_class.instructor.name }} at {{ yoga_class.venue.name }} </h5>
+          <p class="card-text">ffff</p>
+          <a href="#" class="btn btn-primary">fff</a>
+        </div>
+      </div>
+      {% endfor %}
+</div>
+{% endblock %}
