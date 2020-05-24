@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, send_from_directory, flash
 from . import app, db
 from .models import Instructor, Venue, Feature, ClassType, YogaClass
 from .forms import CreateInstructorForm, CreateVenueForm, CreateClassForm
-
+from datetime import timedelta
 
 @app.route('/')
 def index():
@@ -83,14 +83,16 @@ def create_classes():
         try:
             instructor_id = form.instructor_id.data
             venue_id = form.venue_id.data
-            start_time = form.start_time.data
-            duration = form.duration.data
-            frequency = form.frequency.data 
+            class_start = form.start_time.data
+            class_end = class_start + timedelta(minutes=form.duration.data)
+            new_class = YogaClass(instructor_id=instructor_id, venue_id=venue_id, class_start=class_start, class_end=class_end)
+            db.session.add(new_class)
+            db.session.commit()
         except:
             flash('Something went wrong')
         else:
             flash('The class has been added')
-            return redirect('/')
+            return redirect('/classes')
 
     return render_template('forms/class.html', form=form)
 
