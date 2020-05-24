@@ -3,14 +3,22 @@
 {% block content %}
 <div class="card-columns p-5">
       {% for yoga_class in classes %}
+      {% if yoga_class %}
       <div class="card" style="width: 18rem;">
-        <img src="{{ yoga_class.picture }}" class="card-img-top" alt="...">
+        <img src="{{ yoga_class.instructor.img_link }}" class="card-img-top" alt="...">
         <div class="card-body">
-          <h5 class="card-title">{{ yoga_class.instructor.name }} at {{ yoga_class.venue.name }} </h5>
-          <p class="card-text">ffff</p>
-          <a href="#" class="btn btn-primary">fff</a>
+          <h5 class="card-title">{{ yoga_class.instructor.name }}'s Yoga class at {{ yoga_class.venue.name }} </h5>
+          <p class="card-text"><i class="far fa-clock"></i><b> Starts: </b>{{ yoga_class.class_start.strftime("%H:%M:%S %d %B, %Y")}}</p>
+          <p class="card-text"><i class="fas fa-clock"></i><b> Ends: </b> {{ yoga_class.class_end.strftime("%H:%M:%S %d %B, %Y")}}</p>
+          <a href="/venues/{{ yoga_class.venue.id }}" class="btn btn-primary">View Venue</a>
+          <a href="/instructors/{{ yoga_class.instructor.id }}" class="btn btn-primary">View Instructor</a>
         </div>
       </div>
+      {% else %}
+      <div class="alert alert-dark" role="alert">
+        It looks like there are no classes. <a href="/classes/create" class="alert-link">Click here to promote your class!</a>
+      </div>
+      {% endif %}
       {% endfor %}
 </div>
 {% endblock %}
