@@ -74,6 +74,18 @@ def create_venues():
 @app.route('/classes/create', methods=['GET', 'POST'])
 def create_classes():
     form = CreateClassForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        try:
+            instructor_id = form.instructor_id.data
+            venue_id = form.venue_id.data
+            start_time = form.start_time.data
+            duration = form.duration.data
+            frequency = form.frequency.data 
+        except:
+            flash('Something went wrong')
+        else:
+            flash('The class has been added')
+            return redirect('/')
     return render_template('forms/class.html', form=form)
 
 
