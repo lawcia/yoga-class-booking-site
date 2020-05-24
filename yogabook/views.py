@@ -43,8 +43,8 @@ def create_instructors():
         except Exception as error:
             flash('something went wrong!', 'message')
         else:
-            flash('Instructor was successfully added!')
-            return redirect('/')
+            flash(f'Instructor {name} was successfully added!')
+            return redirect('/instructors')
         
     return render_template('forms/instructor.html', form=form)
 
@@ -72,7 +72,7 @@ def create_venues():
             flash('something went wrong!', 'message')
         else:
             flash(f'Venue {name} was successfully added!')
-            return redirect('/')
+            return redirect('/venues')
         
     return render_template('forms/venue.html', form=form)
 
