@@ -130,7 +130,7 @@ class CreateVenueForm(FlaskForm):
 class CreateClassForm(FlaskForm):
     instructor_id = IntegerField('Instructor ID', [validators.DataRequired('Please enter an instructor ID')])
     venue_id = IntegerField('Venue ID', [validators.DataRequired('Please enter a venue ID')])
-    start_time = DateTimeField('Class date & time', [validators.DataRequired('Please enter a start time')])
+    start_time = DateTimeField('Class date & time', [validators.DataRequired('Please enter a start time')], format='%Y-%m-%dT%H:%M')
     duration = IntegerField('Class duration', [validators.DataRequired('Please enter a class duration')])
     frequency = SelectField('Frequency', [validators.DataRequired()], choices=[('once', 'once'), 
     ('weekly', 'weekly'),
@@ -150,4 +150,3 @@ class CreateClassForm(FlaskForm):
             raise ValidationError('Duration can\'t be more than 1 day')
         elif field.data < 0:
             raise ValidationError('Duration can\'t be less than 0')
-

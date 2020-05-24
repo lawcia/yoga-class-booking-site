@@ -24,7 +24,7 @@
     <div class="form-row">
     <div class="form-group col-sm-4">
       {{ form.start_time.label }}
-      {{ form.start_time(class_ = 'form-control', autofocus = true) }}
+      {{ form.start_time(class_ = 'form-control', type = 'datetime-local', autofocus = true) }}
       {% if form.start_time.errors %}
       {% for error in form.start_time.errors %}<small class="form-text text-muted">{{ error }}</small>{% endfor %}
   {% endif %}
