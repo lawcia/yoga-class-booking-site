@@ -139,4 +139,14 @@ class CreateClassForm(FlaskForm):
     def validate_instructor_id(self, field):
         if not Instructor.query.get(field.data):
             raise ValidationError('Please enter a valid instructor ID')
+    
+    def validate_venue_id(self, field):
+        if not Venue.query.get(field.data):
+            raise ValidationError('Please enter a valid venue ID')
+
+    def validate_duration(self, field):
+        if field.data > 1440:
+            raise ValidationError('Duration can\'t be more than 1 day')
+        elif field.data < 0:
+            raise ValidationError('Duration can\'t be less than 0')
 
