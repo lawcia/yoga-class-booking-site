@@ -2,6 +2,7 @@ from wtforms import SelectField, validators, SubmitField, SelectMultipleField, R
 from flask_wtf import FlaskForm
 from .models import Instructor, Venue, YogaClass
 from . import db
+from datetime import datetime, timedelta
 
 
 class CreateInstructorForm(FlaskForm):
@@ -150,3 +151,21 @@ class CreateClassForm(FlaskForm):
             raise ValidationError('Duration can\'t be more than 1 day')
         elif field.data < 0:
             raise ValidationError('Duration can\'t be less than 0')
+
+
+    def validate_start_time(self, field):
+        start_time = field.data
+        end_time = start_time + timedelta(minutes=self.duration.data)
+        instructor_classes = YogaClass.query.filter_by(instructor_id=self.instructor_id.data)
+        if instructor_classes:
+            check_class_clash('Instructor', instructor_classes, start_time, end_time)
+        venue_classes = YogaClass.query.filter_by(venue_id=self.venue_id.data)
+        if venue_classes:
+            check_class_clash('Venue', venue_classes, start_time, end_time)
+
+    
+
+def check_class_clash(name, yoga_classes, start_time, end_time):
+    for yoga_class in yoga_classes:
+        if (start_time <= yoga_class.class_end and end_time >= yoga_class.class_start):
+            raise ValidationError(f'This {name} has a class booked at {yoga_class.class_start} till {yoga_class.class_end}, Please allow at least 1 minute between classes')

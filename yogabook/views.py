@@ -86,6 +86,7 @@ def create_classes():
         else:
             flash('The class has been added')
             return redirect('/')
+
     return render_template('forms/class.html', form=form)
 
 
