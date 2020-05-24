@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, send_from_directory, flash
 from . import app, db
 from .models import Instructor, Venue, Feature, ClassType
-from .forms import CreateInstructorForm, CreateVenueForm
+from .forms import CreateInstructorForm, CreateVenueForm, CreateClassForm
 
 
 @app.route('/')
@@ -70,6 +70,12 @@ def create_venues():
             return redirect('/')
         
     return render_template('forms/venue.html', form=form)
+
+@app.route('/classes/create', methods=['GET', 'POST'])
+def create_classes():
+    form = CreateClassForm()
+    return render_template('forms/class.html', form=form)
+
 
 @app.route('/instructors/<id>')
 def instructor(id):
